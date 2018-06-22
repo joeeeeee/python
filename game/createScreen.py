@@ -47,10 +47,10 @@ class Plane(Base):
 
 class HeroPlane(Plane):
     def __init__(self, screen, name):
-        super().__init__(screen, name)
         self.x = 230
         self.y = 600
         self.imageUrl = './feiji/hero.gif'
+        super().__init__(screen, name)
 
     def moveLeft(self):
         self.x = self.x - 10
@@ -67,11 +67,11 @@ class HeroPlane(Plane):
 
 class EnemyPlane(Plane):
     def __init__(self, screen, name):
-        super().__init__(screen, name)
         self.x = 0
         self.y = 0
         self.imageUrl = './feiji/enemy0.png'
         self.direction = 'right'
+        super().__init__(screen, name)
 
     def display(self):
         self.screen.blit(self.image, (self.x, self.y))
@@ -169,8 +169,8 @@ def main():
 
     # 3.加载飞机
     # hero = pygame.image.load('./feiji/hero.gif').convert()
-    plant = Plane(screen)
-    enemyPlane = EnemyPlane(screen)
+    plant = HeroPlane(screen,'hero')
+    enemyPlane = EnemyPlane(screen,'enemy')
 
     while True:
         # 将图片覆盖到窗口
