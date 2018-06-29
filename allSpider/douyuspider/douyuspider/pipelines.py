@@ -11,6 +11,7 @@ import os
 import json
 
 class DouyuspiderPipeline(ImagesPipeline):
+    test = 'E:\images'
     IMAGE_STORE = 'E:\images'
 #
     # get_media_requests的作用就是为每一个图片链接生成一个Request对象，这个方法的输出将作为item_completed的输入中的results，
@@ -19,9 +20,9 @@ class DouyuspiderPipeline(ImagesPipeline):
         image_url = item["imageUrls"]
         yield scrapy.Request(image_url)
 
-    def item_complete(self, results, item, info):
+    def item_completed(self, results, item, info):
         # 固定写法，获取图片路径，同时判断这个路径是否正确，如果正确，就放到 image_path里，ImagesPipeline源码剖析可见
         image_path = [x["path"] for ok, x in results if ok]
-        os.rename(self.IMAGES_STORE + "/" + image_path[0], self.IMAGES_STORE + "/" + item["name"] + ".jpg")
-        item["imagesPath"] = self.IMAGES_STORE + "/" + item["name"]
+        # os.rename(self.test + "/" + image_path[0], self.test + "/" + item["name"] + ".jpg")
+        item["imagesPath"] = self.test + "/" + item["name"]
 
