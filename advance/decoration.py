@@ -5,10 +5,28 @@
 # 4. 执⾏函数后清理功能
 # 5. 权限校验等场景
 # 6. 缓存
-
-# 不带参数
 from time import ctime,sleep
 
+# test
+def log(text):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            print('现在时间：% : %s', (ctime(),text))
+            print(func.__name__)
+            func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@log('test')
+def test1():
+    print('test')
+
+
+test1()
+exit()
+
+
+# 不带参数
 def timefun(func):
     def wrapperfunc():
         print('%s call at time %s' % (func.__name__, ctime()))
