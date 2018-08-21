@@ -41,7 +41,7 @@ class DmozSpider(RedisCrawlSpider):
         workplace = response.xpath('//tr[@class="c bottomline"]/td[1]/text()').extract_first()
         work_type = response.xpath('//tr[@class="c bottomline"]/td[2]/text()').extract_first()
         recruit_number = response.xpath('//tr[@class="c bottomline"]/td[3]/text()').extract_first()
-        recruit_number = re.match("(\d)*",recruit_number).group()
+        recruit_number = re.match("(\d)*" ,recruit_number).group()
         duty = response.xpath('//tr[@class="c"][1]//ul[@class="squareli"]/li')
         required = response.xpath('//tr[@class="c"][2]//ul[@class="squareli"]/li')
         word_duty = []
@@ -54,7 +54,6 @@ class DmozSpider(RedisCrawlSpider):
             if len(r.xpath('./text()').extract()) > 0:
                 work_required.append(r.xpath('./text()').extract()[0])
 
-        # exit()
         item = TencentItem()
         item['position'] = position
         item['workplace'] = workplace
@@ -63,50 +62,3 @@ class DmozSpider(RedisCrawlSpider):
         item['work_duty'] = ''.join(word_duty)
         item['work_required'] = ''.join(work_required)
         yield item
-
-        # word_duty = response.
-
-        # for i in response.xpath('//table[@class="tablelist"]//tr[@class="odd"] |' +
-        #                         '//table[@class="tablelist"]//tr[@class="even"]'):
-        #
-        #     name = i.xpath('./td[1]/a/text()').extract()[0]
-        #     detailLink = str("http://hr.tencent.com") + i.xpath('./td[1]/a/@href').extract()[0]
-        #     if len(i.xpath('./td[2]/text()').extract()) > 1:
-        #         workLocation = i.xpath('./td[2]/text()').extract()[0]
-        #     else:
-        #         workLocation = ''
-        #
-        #     peopleNumber = i.xpath('./td[3]/text()').extract()[0]
-        #     workLocation = i.xpath('./td[4]/text()').extract()[0]
-        #     publishTime = i.xpath('./td[5]/text()').extract()[0]
-        #     # item = AmazonItem()
-        #     # item['name'] = name
-        #     # item['description'] = peopleNumber
-        #     # item['detail_link'] = detailLink
-        #     # item['work_location'] = workLocation
-        #     # item['publishTime'] = publishTime
-        #     yield item
-
-    # def parse_directory(self, response):
-    #     self.logger.warning("解析状态:" + str(response.status))
-    #     self.logger.warning("解析链接：" + response.url)
-    #     for i in response.xpath('//table[@class="tablelist"]//tr[@class="odd"] |' +
-    #                             '//table[@class="tablelist"]//tr[@class="even"]'):
-    #
-    #         name = i.xpath('./td[1]/a/text()').extract()[0]
-    #         detailLink = str("http://hr.tencent.com") + i.xpath('./td[1]/a/@href').extract()[0]
-    #         if len(i.xpath('./td[2]/text()').extract()) > 1:
-    #             workLocation = i.xpath('./td[2]/text()').extract()[0]
-    #         else:
-    #             workLocation = ''
-    #
-    #         peopleNumber = i.xpath('./td[3]/text()').extract()[0]
-    #         workLocation = i.xpath('./td[4]/text()').extract()[0]
-    #         publishTime = i.xpath('./td[5]/text()').extract()[0]
-    #         # item = AmazonItem()
-    #         # item['name'] = name
-    #         # item['description'] = peopleNumber
-    #         # item['detail_link'] = detailLink
-    #         # item['work_location'] = workLocation
-    #         # item['publishTime'] = publishTime
-    #         yield item

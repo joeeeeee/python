@@ -23,6 +23,6 @@ class RedisServer(object):
         host = config.get('redis', 'host')
         port = config.get('redis', 'port')
         auth = config.get('redis', 'auth')
-        redis_pool = redis.ConnectionPool(host=host, port=port)
+        redis_pool = redis.ConnectionPool(host=host, port=port, password=auth)
         self.redis_server = redis.Redis(connection_pool=redis_pool)
 
